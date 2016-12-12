@@ -1,0 +1,4 @@
+#!/bin/bash
+# генерация пароля
+PASSWORD2=`cat /dev/urandom | tr -dc _A-Z-a-z-0-9 | head -c10`
+echo Password = $PASSWORD2

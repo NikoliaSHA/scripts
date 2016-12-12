@@ -1,0 +1,3 @@
+#!/bin/bash
+# коммент
+echo 'Hello World!'

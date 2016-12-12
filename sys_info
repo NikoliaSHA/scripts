@@ -1,0 +1,61 @@
+#!/bin/bash
+# информация о системе
+
+TITLE="System Information For $HOSTNAME"
+CURRENT_TIME=$(date +"%x %r %Z")
+TIME_STAMP="Generated $CURRENT_TIME, by $USER"
+
+report_uptime () {
+	cat <<- _EOF_
+		<h2>System Uptime</h2>
+		<pre>$(uptime)</pre>
+		_EOF_
+	return
+}
+report_disk_space () {
+	cat <<- _EOF_
+		<h2>Disk Space</h2>
+		<pre>$(df -h)</pre>
+		_EOF_
+	return
+}
+report_home_space () {
+    if [[ $(id -u) -eq 0 ]]; then
+	cat <<- _EOF_
+		<h2>Home Space</h2>
+		<pre>$(du -sh /home/nikolia)</pre>
+		_EOF_
+    else
+	cat <<- _EOF_
+		<h2>Home Space</h2>
+		<pre>$(du -sh $HOME)</pre>
+		_EOF_
+    fi
+    return
+}
+report_1000_space () {
+	cat <<- _EOF_
+		<h2>1000 Disk Space</h2>
+		<pre>$(du -sh /home/1000_G)</pre>
+		_EOF_
+	return
+}
+cat << _EOF_
+<html>
+<head>
+	<title>$TITLE</title>
+<style>
+	.error {color:red;}
+</style>
+</head>
+<body>
+	<h1>$TITLE</h1>
+	<p>$TIME_STAMP</p>
+	$(report_uptime)
+	$(report_disk_space)
+	$(report_home_space)
+	$(report_1000_space)
+</body>
+</html>
+_EOF_
+

@@ -1,0 +1,4 @@
+#!/bin/bash
+# резервное копирование
+rsync -avz --delete --progress \
+/home/1000_G/ya.disk/Book /run/media/nikolia/program/YandexDisk/Book

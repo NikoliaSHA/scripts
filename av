@@ -1,4 +1,0 @@
-#!/bin/bash
-# update and scan antivirus clam
-sudo freshclam
-sudo clamscan -ir --remove /home/nikolia/.thunderbird/

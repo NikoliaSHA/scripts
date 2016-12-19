@@ -1,0 +1,22 @@
+#!/bin/bash
+# update and scan antivirus clam
+
+read -p "Нужно обновление антивируса? (Y/n) "
+
+if [[ $REPLY =~ ^[yn]$ ]]; then
+	if [[ $REPLY == y ]]; then
+		echo "Обновление антивируса"
+		sleep 5
+		sudo freshclam
+	fi
+	if [[ $REPLY == n ]]; then
+		echo "проверка на вирусы"
+		sleep 5
+		sudo clamscan -ir --remove /home 
+	fi
+else
+	echo "Обновление и проверка на антивирусы"
+	sleep 5
+	sudo freshclam
+	sudo clamscan -ir --remove /home/nikolia/.thunderbird /tmp .cache 
+fi

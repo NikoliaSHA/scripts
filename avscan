@@ -15,7 +15,7 @@ if [[ $REPLY =~ ^[yn]$ ]]; then
 		sudo clamscan -ir --remove /home 
 	fi
 else
-	echo "Обновление и проверка на антивирусы"
+	echo "Обновление и проверка на вирусы"
 	sleep 5
 	sudo freshclam
 	sudo clamscan -ir --remove /home/nikolia/.thunderbird /tmp .cache 

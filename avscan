@@ -1,20 +1,35 @@
 #!/bin/bash
 # update and scan antivirus clam
-clear
+
+DIRP=""
+
+if [ "$1" ]; then
+	until [ -z "$1" ]
+	do
+		DIRP+="$1 " 
+	    shift
+	done
+else
+### здесь прописываем пути к папкам	
+	DIRP="/home "
+fi
+
 read -p "Нужно обновление антивируса? (Y/n) "
 
+scan (){
+	echo "### проверка на вирусы $DIRP"
+	sleep 3
+	clamscan -ir --remove $DIRP
+}
 case $REPLY in
 	y|"") echo "### Обновление антивируса"
 	        sleep 3
-		sudo freshclam
-		echo "### проверка на вирусы"
-		sleep 3
-		sudo clamscan -ir --remove /home
+		freshclam		
+		scan
 		;;
-	n)	echo "### проверка на вирусы"
-		sleep 3
-		sudo clamscan -ir --remove /home
+	n)	scan
 		;;
 	*)	exit
 		;;
 esac
+exit 0
